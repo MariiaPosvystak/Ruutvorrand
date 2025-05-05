@@ -19,7 +19,6 @@ def võrrand(a, b, c):
 
 def tuhista(event):
     sisetus.delete(0,END)
-
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 aken=Tk()
 aken.title("Квадратные уравнения")
@@ -35,9 +34,9 @@ nupp2=Button(aken, text="График", bg="lightgreen", font=("Arial", 13),fg="
 sisetus=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
 sisetus1=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
 sisetus2=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
-sisetus.bind("<FocusIN>", tuhista)
-sisetus1.bind("<FocusIN>", tuhista)
-sisetus2.bind("<FocusIN>", tuhista)
+# sisetus.bind("<FocusIN>", tuhista)
+# sisetus1.bind("<FocusIN>", tuhista)
+# sisetus2.bind("<FocusIN>", tuhista)
 pealkiri.grid(row=0, column=2, pady=20, columnspan=10)
 sisetus.grid(row=1, column=1, pady=10, padx=5)
 text.grid(row=1, column=2, pady=10)
@@ -49,5 +48,7 @@ nupp.grid(row=1, column=7, pady=10, padx=10)
 nupp2.grid(row=1, column=8, pady=10)
 
 
-pealkiri2.bind(võrrand)
+
+# pealkiri2=Label(aken, text=f"{võrrand}", font=("Arial",14), fg="black", width=25, height=5)
+# pealkiri2.grid(row=3, column=2, pady=20, columnspan=10)
 aken.mainloop()
