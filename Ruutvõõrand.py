@@ -10,10 +10,10 @@ def võrrand(a, b, c):
     if d>0:
         x1=-(b)+D/2*a
         x2=-(b)-D/2*a
-        pealkiri2.config(text="Решение\n""\n"f"D = {d}\n"f"X1 = {x1}\n"f"X2 = {x2}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
+        pealkiri2.config(text="Решение\n"f"D = {d}\n"f"X1 = {x1}\n"f"X2 = {x2}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
     elif d==0:
         x=-(b)/2*a
-        pealkiri2.config(text="Решение\n""\n"f"D = {d}\n"f"X1 = {x}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
+        pealkiri2.config(text="Решение\n"f"D = {d}\n"f"X1 = {x}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
     else: 
         pealkiri2.config(text="Решения нет",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
 
@@ -37,6 +37,7 @@ sisetus2=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
 # sisetus.bind("<FocusIN>", tuhista)
 # sisetus1.bind("<FocusIN>", tuhista)
 # sisetus2.bind("<FocusIN>", tuhista)
+nupp.bind("<Button>",võrrand )
 pealkiri.grid(row=0, column=2, pady=20, columnspan=10)
 sisetus.grid(row=1, column=1, pady=10, padx=5)
 text.grid(row=1, column=2, pady=10)
@@ -49,6 +50,6 @@ nupp2.grid(row=1, column=8, pady=10)
 
 
 
-# pealkiri2=Label(aken, text=f"{võrrand}", font=("Arial",14), fg="black", width=25, height=5)
-# pealkiri2.grid(row=3, column=2, pady=20, columnspan=10)
+pealkiri2=Label(aken, bg="yellow", text=f"Решение", font=("Arial",14), fg="black", width=25, height=5)
+pealkiri2.grid(row=3, column=2, pady=20, columnspan=10)
 aken.mainloop()
