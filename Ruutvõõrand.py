@@ -1,55 +1,88 @@
-from tkinter import *
 import math
+from tkinter import *
+import matplotlib.pyplot as plt
+import numpy as np
+def lahendus(event):
+    a=sisestus.get()
+    b=sisestus1.get()
+    c=sisestus2.get()
+    if not a or not b or not c:
+        if not a:
+            sisestus.config(bg="red", font=("Arial",12), fg="black",width=3)
+        if not b:
+            sisestus1.config(bg="red", font=("Arial",12), fg="black",width=3)
+        if not c:
+            sisestus2.config(bg="red", font=("Arial",12), fg="black",width=3)
+        pealkiri5.config(text="Palun sisestage kõik kordajad!", bg="red",  font=("Arial", 13), fg="black", width=20, height=5)
+        return
+    try:
+        arv1=int(a)
+        arv2=int(b)
+        arv3=int(c)
+    except:
+        pealkiri5.config(text="Sisestage ainult täisarvud!", bg="red", font=("Arial", 13), fg="black", width=20, height=5)
+        return
+    sisestus.config( bg="lightblue", font=("Arial",12), fg="green",width=3)
+    sisestus1.config( bg="lightblue", font=("Arial",12), fg="green",width=3)
+    sisestus2.config( bg="lightblue", font=("Arial",12), fg="green",width=3)
+    D=arv2**2-4*arv1*arv3
+    if D>0:
+        d=math.sqrt(D)
+        x1=round((-arv2+d)/(2*arv1),2)
+        x2=round((-arv2-d)/(2*arv1),2)
+        pealkiri5.config(text=f"D = {D}\n x1 = {x1} \n x2 = {x2}", bg="lightpink",  font=("Arial", 13), fg="black", width=20, height=5)
+    elif D==0:
+        x=round(-arv2/2*arv1,2)
+        pealkiri5.config(text=f"D = {D}\n x = {x}", bg="lightblue",  font=("Arial", 13), fg="black", width=20, height=5)
+    else:
+        pealkiri5.config(text="Lahendusi ei ole!", bg="lightgreen",  font=("Arial", 13), fg="black", width=20, height=5)
 
-def võrrand(a, b, c):
-    a=int(sisetus.get())
-    b=int(sisetus1.get())
-    c=int(sisetus2.get())
-    d=b**2 - 4*a*c
-    D=math.sqrt(d)
-    if d>0:
-        x1=-(b)+D/2*a
-        x2=-(b)-D/2*a
-        pealkiri2.config(text="Решение\n"f"D = {d}\n"f"X1 = {x1}\n"f"X2 = {x2}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
-    elif d==0:
-        x=-(b)/2*a
-        pealkiri2.config(text="Решение\n"f"D = {d}\n"f"X1 = {x}",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
-    else: 
-        pealkiri2.config(text="Решения нет",bg="yellow", font=("Arial",14), fg="black", width=25, height=5)
+def graafik(event):
+    arv1=int(sisestus.get())
+    arv2=int(sisestus1.get())
+    arv3=int(sisestus2.get())
+    x=np.arange(-11,12,1)
+    y=arv1*x**2+arv2*x+arv3
+    plt.figure(facecolor='lightblue')
+    plt.title("Graafik")
+    plt.xlabel("x telg")
+    plt.ylabel("y telg")
+    plt.grid(True)
+    plt.plot(x,y, color='yellow', linestyle='-', marker='D',
+    markersize=8, label="Joonisejoon")
+    plt.show()
 
-def tuhista(event):
-    sisetus.delete(0,END)
-#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 aken=Tk()
-aken.title("Квадратные уравнения")
-aken.geometry("555x555")
-aken.configure(bg="darkred")
-aken.resizable(width=True, height=True)
-pealkiri=Label(aken, text="Решение квадратного уравнения",bg="khaki", font=("Arial",18), fg="black")
-text=Label(aken, text="x**2 + ",font=("Arial",14),bg="darkred", fg="black")
-text1=Label(aken, text="x + ",font=("Arial",14),bg="darkred", fg="black")
-text2=Label(aken, text=" = 0",font=("Arial",14),bg="darkred", fg="black")
-nupp=Button(aken, text="Решить", bg="lightgreen", font=("Arial", 13),fg="brown", relief=RAISED)
-nupp2=Button(aken, text="График", bg="lightgreen", font=("Arial", 13),fg="brown", relief=RAISED)#SUNKEN, RAISED,GROOVE, and RIDGE
-sisetus=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
-sisetus1=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
-sisetus2=Entry(aken, bg="white", font=("Arial", 12), fg="black", width=3)
-# sisetus.bind("<FocusIN>", tuhista)
-# sisetus1.bind("<FocusIN>", tuhista)
-# sisetus2.bind("<FocusIN>", tuhista)
-nupp.bind("<Button>",võrrand )
-pealkiri.grid(row=0, column=2, pady=20, columnspan=10)
-sisetus.grid(row=1, column=1, pady=10, padx=5)
-text.grid(row=1, column=2, pady=10)
-sisetus1.grid(row=1, column=3, pady=10)
-text1.grid(row=1, column=4, pady=10)
-sisetus2.grid(row=1, column=5, pady=10)
-text2.grid(row=1, column=6, pady=10)
-nupp.grid(row=1, column=7, pady=10, padx=10)
-nupp2.grid(row=1, column=8, pady=10)
+aken.title("Teema 8")
+aken.geometry("500x500")
+aken.configure(bg="white")
+aken.resizable(width=False, height=False)
+pealkiri=Label(aken, text="Ruutvõrrandi lahendamine", bg="lightblue", font=("Arial", 16), fg="green")
+nupp=Button(aken, text="Lahenda!", bg="green", font=("Arial", 12), fg="black", relief=RAISED)
+nupp.bind("<Button-1>", lahendus)
+nupp1=Button(aken, text="Graafik", bg="green", font=("Arial", 12), fg="black", relief=RAISED)#RAISED, GROOVE, RIDGE,SUNKEN
+nupp1.bind("<Button-1>", graafik)
+sisestus=Entry(aken, bg="lightblue", font=("Arial",12), fg="green",width=3)
+pealkiri2=Label(aken, text="x**2+", bg="white", font=("Arial", 16), fg="green")
+sisestus1=Entry(aken, bg="lightblue", font=("Arial",12), fg="green",width=3)
+pealkiri3=Label(aken, text="x+", bg="white", font=("Arial", 16), fg="green")
+sisestus2=Entry(aken, bg="lightblue", font=("Arial",12), fg="green",width=3)
+pealkiri4=Label(aken, text="=0", bg="white", font=("Arial", 16), fg="green")
+pealkiri5=Label(aken, text="Lahendus", bg="yellow", font=("Arial", 13), fg="black", width=20, height=5)
 
+pealkiri.grid(row=0, column=2, pady=10, columnspan=10)
 
+sisestus.grid(row=1, column=1, pady=10)
+pealkiri2.grid(row=1, column=2, pady=10)
+sisestus1.grid(row=1, column=3,pady=10)
+pealkiri3.grid(row=1, column=4, pady=10)
+sisestus2.grid(row=1, column=5, pady=10)
+pealkiri4.grid(row=1, column=6, pady=10)
 
-pealkiri2=Label(aken, bg="yellow", text=f"Решение", font=("Arial",14), fg="black", width=25, height=5)
-pealkiri2.grid(row=3, column=2, pady=20, columnspan=10)
+nupp.grid(row=1, column=7, pady=10)
+nupp1.grid(row=1, column=8, pady=10)
+
+pealkiri5.grid(row=2, column=2, pady=10, columnspan=10)
+
 aken.mainloop()
